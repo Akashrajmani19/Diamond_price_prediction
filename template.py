@@ -1,7 +1,7 @@
 import os
-from pathliib import path
+from pathlib import Path
 
-package_name = "Project_name"
+package_name = "Diamond_price_prediction"
 
 list_of_files = [
     f".github/workflows/.gitkeep",
@@ -19,12 +19,12 @@ list_of_files = [
     "notebooks/research.ipynb",
     "notebooks/data/.gitkeep",
     "requirements.txt",
-    "setup.py"
+    "setup.py",
     "init_setup.sh",
 ]
 
 for filepath in list_of_files:
-    filepath = path(filepath)
+    filepath = Path(filepath)
     filedir, filename = os.path.split(filepath)
 
     """ How exist_ok works : if 'directory' already exists,
