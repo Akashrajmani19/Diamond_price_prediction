@@ -39,6 +39,11 @@ class DataIntegration:
             test_data.to_csv(self.ingestion_config.test_data,index = False)
 
             logging.info("Data ingestion part completed.")
+            
+            return(
+                self.ingestion_config.train_data,
+                self.ingestion_config.test_data
+            )
         except Exception as e:
             logging.info('EXCEPTION DURING OCCURED AT DATA INGESTION STAGE.')
 
