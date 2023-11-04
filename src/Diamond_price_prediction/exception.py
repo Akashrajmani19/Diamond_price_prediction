@@ -8,7 +8,7 @@ class CustomException(Exception):
         self.lineno = exc_tb.tb_lineno   # tb = traceback
         self.file_name = exc_tb.tb_frame.f_code.co_filename
     
-    def __str__(self):
+    def __str__(self): # String repersentation of object
         return f"Error occured in python script name {self.file_name} line no. {self.lineno} error massage : {self.error_massage}"
     
 if __name__ == "__main__":
