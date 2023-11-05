@@ -21,43 +21,45 @@ class DataTransformation:
     def __init__(self):
         self.data_transformation_config = DataTransformationConfig()
          
-        # Define which columns should be ordinal-encodded and which should be scaled
-        categorical_cols = ["cut", 'color', 'clarity']
-        numerical_cols = ['carat','depth' ,'table',"x",'y','z'] 
 
-        # Define the customs ranking for each ordinal variable
-        cut_map = ['Fair', 'Good', 'Very Good','Premium','Ideal']
-        clarity_map = ["I1","SI2","SI1","VS2","VS1","VVS2","VVS1","IF"]
-        colore_map = ["D","E","F","G","H","I","J"]
-
-        logging.info('Pipeline Initiated')
-
-        # numerical pipeline
-        num_pipeline = Pipeline(steps= [
-            ("imputer",SimpleImputer(strategy= 'median')),
-            ("scalar",StandardScaler())
-        ])
-
-        # Categorical pipeline
-        cat_pipeline = Pipeline(steps = [
-            ('imputer',SimpleImputer(strategy='most_frequent')),
-            ('ordinalencodder',OrdinalEncoder(categories= [cut_map,colore_map,clarity_map]))
-        ])
-
-        # Now implementing this pipelines
-        preprocessor = ColumnTransformer(
-            [
-                ('num_pipeline',num_pipeline,numerical_columns),
-                ('cat_pipeline',cat_pipeline,Categorical_columns)
-            ]
-        )
-
-        return preprocessor
 
 
     def get_data_transformation(self):
         try:
             logging.info("Data transformation initiated")
+
+            # Define which columns should be ordinal-encodded and which should be scaled
+            categorical_cols = ["cut", 'color', 'clarity']
+            numerical_cols = ['carat','depth' ,'table',"x",'y','z'] 
+
+            # Define the customs ranking for each ordinal variable
+            cut_map = ['Fair', 'Good', 'Very Good','Premium','Ideal']
+            clarity_map = ["I1","SI2","SI1","VS2","VS1","VVS2","VVS1","IF"]
+            colore_map = ["D","E","F","G","H","I","J"]
+
+            logging.info('Pipeline Initiated')
+
+            # numerical pipeline
+            num_pipeline = Pipeline(steps= [
+                ("imputer",SimpleImputer(strategy= 'median')),
+                ("scalar",StandardScaler())
+            ])
+
+            # Categorical pipeline
+            cat_pipeline = Pipeline(steps = [
+                ('imputer',SimpleImputer(strategy='most_frequent')),
+                ('ordinalencodder',OrdinalEncoder(categories= [cut_map,colore_map,clarity_map]))
+            ])
+
+            # Now implementing this pipelines
+            preprocessor = ColumnTransformer(
+                [
+                    ('num_pipeline',num_pipeline,numerical_cols),
+                    ('cat_pipeline',cat_pipeline,categorical_cols)
+                ]
+            )
+
+            return preprocessor
 
         except Exception as e:
             logging.info("Exception occured in the intiate_datatransformation")
@@ -66,7 +68,7 @@ class DataTransformation:
     def initialize_data_transformation(self,train_path, test_path):
         try:
             train_df = pd.read_csv(train_path)
-            test_df= pd.resd_csv(test_path)
+            test_df= pd.read_csv(test_path)
 
             logging.info("read train and test data complete")
             logging.info(f"Train DataFrame Head :\n{train_df.head().to_string()}")
@@ -74,10 +76,12 @@ class DataTransformation:
 
             preprocessor_obj = self.get_data_transformation()
             target_column = 'price'
-            drop_columns = [target_column_name,'id']
+            drop_columns = [target_column,'id']
 
             input_feature_train_df = train_df.drop(columns=drop_columns,axis =1)
-            target_feature_train_df = train_df[target_column_name]
+            input_feature_test_df = test_df.drop(columns=drop_columns,axis =1)
+            target_feature_train_df = train_df[target_column]
+            target_feature_test_df = test_df[target_column]
 
             input_feature_train_arr = preprocessor_obj.fit_transform(input_feature_train_df)
             input_feature_test_arr = preprocessor_obj.transform(input_feature_test_df)

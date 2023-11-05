@@ -35,7 +35,7 @@ class ModelTrainer:
             'Lasso':Lasso(),
             'Ridge':Ridge(),
             'Elasticnet':ElasticNet()
-        }
+            }
             
             model_report:dict=evaluate_model(X_train,y_train,X_test,y_test,models)
             print(model_report)
@@ -63,4 +63,4 @@ class ModelTrainer:
 
         except Exception as e:
             logging.info('Exception occured at Model Training')
-            raise customexception(e,sys)
+            raise CustomException(e,sys)
