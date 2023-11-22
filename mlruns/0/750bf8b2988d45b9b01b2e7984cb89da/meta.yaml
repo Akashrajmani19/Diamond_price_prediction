@@ -1,0 +1,15 @@
+artifact_uri: file:///F:/Project_template/mlruns/0/750bf8b2988d45b9b01b2e7984cb89da/artifacts
+end_time: 1700654884023
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 750bf8b2988d45b9b01b2e7984cb89da
+run_name: suave-gnat-108
+run_uuid: 750bf8b2988d45b9b01b2e7984cb89da
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1700654879804
+status: 3
+tags: []
+user_id: SUNIL

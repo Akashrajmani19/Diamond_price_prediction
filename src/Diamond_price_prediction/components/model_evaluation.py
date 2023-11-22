@@ -43,11 +43,14 @@ class ModelEvaluation:
                 mlflow.log_metric("mae",mae)
                 mlflow.log_metric("r2",r2)
 
+                # this condition is forbthe dagshub
+                # Model registry does not work with the file store
                 if tracking_url_type_store != "file":
                 # register the model
                 # There are other ways to use the Model Registry, which depends on the use case
                 #please refer to the doc for more information]
                     mlflow.sklearn.log_model(model,"model",registered_model_name='ml_model')
+                
                 else:
                     mlflow.sklearn.log_model(model,'model')
         except Exception as e:

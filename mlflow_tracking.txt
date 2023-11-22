@@ -1,4 +1,0 @@
-MLFLOW_TRACKING_URI=https://dagshub.com/Akashrajmani19/Diamond_price_prediction.mlflow \
-MLFLOW_TRACKING_USERNAME=Akashrajmani19 \
-MLFLOW_TRACKING_PASSWORD=ddfb96ef69b16be735b798c3d8c8a7dddacecce4 \
-python script.py
