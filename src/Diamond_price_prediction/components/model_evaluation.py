@@ -30,6 +30,9 @@ class ModelEvaluation:
             model_path = os.path.join("artifacts","model.pkl")
             model = load_object(model_path) # loading our trained model
 
+            mlflow.set_registry_uri()# uri = uniform resource identifier
+            tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
+
 
 
             with mlflow.start_run():
@@ -39,6 +42,14 @@ class ModelEvaluation:
                 mlflow.log_metric("rmse",rmse)
                 mlflow.log_metric("mae",mae)
                 mlflow.log_metric("r2",r2)
+
+                if tracking_url_type_store != "file":
+                # register the model
+                # There are other ways to use the Model Registry, which depends on the use case
+                #please refer to the doc for more information]
+                    mlflow.sklearn.log_model(model,"model",registered_model_name='ml_model')
+                else:
+                    mlflow.sklearn.log_model(model,'model')
         except Exception as e:
             logging.info("Exception occured in the intiate_model_evaluation")
             raise CustomException(e,sys)
