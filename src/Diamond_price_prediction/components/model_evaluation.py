@@ -30,7 +30,7 @@ class ModelEvaluation:
             model_path = os.path.join("artifacts","model.pkl")
             model = load_object(model_path) # loading our trained model
 
-            mlflow.set_registry_uri()# uri = uniform resource identifier
+            mlflow.set_registry_uri("https://dagshub.com/Akashrajmani19/Diamond_price_prediction.mlflow")# uri = uniform resource identifier
             tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
 
 
