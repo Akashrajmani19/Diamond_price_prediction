@@ -1,0 +1,16 @@
+stages:
+  training:
+    cmd: python src\Diamond_price_prediction\pipelines\training_pipeline.py
+    deps: 
+      - src\Diamond_price_prediction\pipelines\training_pipeline.py
+      - src\Diamond_price_prediction\components\data_integration.py
+      - src\Diamond_price_prediction\components\data_transformation.py
+      - src\Diamond_price_prediction\components\model_trainer.py
+      - src\Diamond_price_prediction\components\model_evaluation.py
+
+    outs:
+      - artifacts\raw_data.csv
+      - artifacts\train_data.csv
+      - artifacts\test_data.csv
+      - artifacts\preprocessor.pkl
+      - artifacts\model.pkl

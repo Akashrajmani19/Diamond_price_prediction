@@ -1,0 +1,15 @@
+artifact_uri: file:///F:/Project_template/mlruns/0/a027be3326ad4805930f1a1de704b500/artifacts
+end_time: 1701148168893
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: a027be3326ad4805930f1a1de704b500
+run_name: sedate-whale-247
+run_uuid: a027be3326ad4805930f1a1de704b500
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1701148165451
+status: 3
+tags: []
+user_id: SUNIL
